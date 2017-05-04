@@ -1,23 +1,37 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
+class Window {
+public:
+	Window(int h, int w, const char* t)
+		: _window(new sf::RenderWindow()) {
+		_window->create(sf::VideoMode(h, w), t);
+	}
+	sf::RenderWindow* getWindow() {
+		return _window;
+	}
+private:
+	sf::RenderWindow* _window;
+	int _height;
+	int _width;
+};
+
 int main() {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+	Window gw(800, 400, "Tic Tac Toe Multiplayer");
+	
+	// Game loop
+	while(gw.getWindow()->isOpen()) {
+		// Handle input
+		sf::Event event;
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+		while(gw.getWindow()->pollEvent(event)) {
+			switch(event.type) {
+				case sf::Event::Closed:
+					gw.getWindow()->close();
+					break;
+			}
+		}
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-
-    return 0;
+		gw.getWindow()->display();
+	}
 }
