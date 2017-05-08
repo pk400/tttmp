@@ -16,31 +16,19 @@ private:
 	int _width;
 };
 
+struct Grid {
+	Grid(int h, int w) {
+		rect.setSize(sf::Vector2f(h, w));
+		rect.setFillColor(sf::Color::White);
+	}
+	void setPos(int x, int y) {
+		rect.setPosition(sf::Vector2f(x, y));
+	}
+	sf::RectangleShape rect;
+};
+
 int main() {
-	Window gw(150, 150, "Tic Tac Toe Multiplayer");
-	
-	// Draw lines
-	sf::Color linecolor = sf::Color::Black;
-
-	sf::Vertex line1[] = {
-			sf::Vertex(sf::Vector2f(50, 0), linecolor),
-			sf::Vertex(sf::Vector2f(50, 150), linecolor)
-	};
-
-	sf::Vertex line2[] = {
-			sf::Vertex(sf::Vector2f(100, 0), linecolor),
-			sf::Vertex(sf::Vector2f(100, 150), linecolor)
-	};
-
-	sf::Vertex line3[] = {
-			sf::Vertex(sf::Vector2f(0, 50), linecolor),
-			sf::Vertex(sf::Vector2f(150, 50), linecolor)
-	};
-
-	sf::Vertex line4[] = {
-			sf::Vertex(sf::Vector2f(0, 100), linecolor),
-			sf::Vertex(sf::Vector2f(150, 100), linecolor)
-	};
+	Window gw(149, 149, "Tic Tac Toe Multiplayer");
 
 	// Game loop
 	while(gw.getWindow().isOpen()) {
@@ -55,26 +43,41 @@ int main() {
 			}
 		}
 
-		sf::Vertex line1[] = {
-				sf::Vertex(sf::Vector2f(50, 0), sf::Color::Black),
-				sf::Vertex(sf::Vector2f(50, 150), sf::Color::Black)
-		};
+		// TODO: Turn this into an array/vector
+		Grid
+			g1(49, 49), g2(49, 49), g3(49, 49),
+			g4(49, 49), g5(49, 49), g6(49, 49),
+			g7(49, 49), g8(49, 49), g9(49, 49);
 
+		g1.setPos(0, 0);
+		g2.setPos(50, 0);
+		g3.setPos(100, 0);
 
-		gw.getWindow().clear(sf::Color::White);
+		g4.setPos(0, 50);
+		g5.setPos(50, 50);
+		g6.setPos(100, 50);
 
-		gw.getWindow().draw(line1, 2, sf::Lines);
-		gw.getWindow().draw(line2, 2, sf::Lines);
-		gw.getWindow().draw(line3, 2, sf::Lines);
-		gw.getWindow().draw(line4, 2, sf::Lines);
+		g7.setPos(0, 100);
+		g8.setPos(50, 100);
+		g9.setPos(100, 100);
+
+		gw.getWindow().clear(sf::Color::Black);
+
+		gw.getWindow().draw(g1.rect);
+		gw.getWindow().draw(g2.rect);
+		gw.getWindow().draw(g3.rect);
+		gw.getWindow().draw(g4.rect);
+		gw.getWindow().draw(g5.rect);
+		gw.getWindow().draw(g6.rect);
+		gw.getWindow().draw(g7.rect);
+		gw.getWindow().draw(g8.rect);
+		gw.getWindow().draw(g9.rect);
 
 		sf::Vector2i mousepos = sf::Mouse::getPosition(gw.getWindow());
 
-		if(mousepos.x > 0 && mousepos.x < 150 &&
-				mousepos.y > 0 && mousepos.y < 150) {
-			std::cout << mousepos.x <<
-					" " << mousepos.y << std::endl;
-				}
+		if(g1.rect.getGlobalBounds().contains(sf::Vector2f(mousepos.x, mousepos.y))) {
+			std::cout << "g1" << std::endl;
+		}
 
 		gw.getWindow().display();
 	}
