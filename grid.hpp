@@ -14,7 +14,6 @@ struct tSquare {
 
 class Grid {
 public:
-	//Grid(const Settings& gs);
 	Grid();
 	void initialize(const Settings& gs);
 	std::vector<tSquare> getSquares();

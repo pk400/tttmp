@@ -23,7 +23,6 @@ bool tttmp::run() {
 }
 
 void tttmp::createGrid() {
-	//grid_ = new Grid(gs_);
 	grid_.initialize(gs_);
 }
 
