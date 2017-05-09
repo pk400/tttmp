@@ -2,10 +2,11 @@
 #include "tttmp.hpp"
 
 int main(int argc, char** argv) {
-	tttmp game(149, 149, "Tic Tac Toe Multiplayer");
+	int wsize = 150;
+	tttmp game(wsize, wsize, "Tic Tac Toe Multiplayer");
 
 	Settings gsettings;
-	gsettings.sqsize 	= sf::Vector2f(49, 49);
+	gsettings.sqsize 	= sf::Vector2f(wsize/3, wsize/3);
 	gsettings.bgcolor 	= sf::Color::Black;
 	gsettings.sqcolor 	= sf::Color::White;
 	game.setSettings(gsettings);

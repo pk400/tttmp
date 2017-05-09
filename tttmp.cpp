@@ -1,4 +1,5 @@
 #include "tttmp.hpp"
+#include <iostream>
 
 tttmp::tttmp(int height, int width, const char* title) {
 	gamewindow_.create(sf::VideoMode(height, width), title);
@@ -13,6 +14,7 @@ bool tttmp::run() {
 			exitcode = true;
 			return exitcode;
 		}
+
 		update();
 
 		draw();
@@ -38,16 +40,22 @@ void tttmp::createGrid() {
 	grid.push_back(sq);
 	grid.push_back(sq);
 
-	grid[1].square.setPosition(50, 0);
-	grid[2].square.setPosition(100, 0);
+	for(int i = 0; i < 9; i++) {
+		// Default position for top left square
+		sf::Vector2f pos = sf::Vector2f(0, 0);
 
-	grid[3].square.setPosition(0, 50);
-	grid[4].square.setPosition(50, 50);
-	grid[5].square.setPosition(100, 50);
+		/*	-------------
+		 * 	| 0 | 1 | 2 |
+		 *  | 3 | 4 | 5 |
+		 *  | 6 | 7 | 8 |
+		 *  -------------
+		 */
 
-	grid[6].square.setPosition(0, 100);
-	grid[7].square.setPosition(50, 100);
-	grid[8].square.setPosition(100, 100);
+		pos.x = (i%3==0)?0:((i%2==0)?gs_.sqsize.x:gs_.sqsize.x*2);
+		pos.y = (i>5)?gs_.sqsize.y*2:((i>2)?gs_.sqsize.y:0);
+
+		grid[i].square.setPosition(pos);
+	}
 }
 
 int tttmp::getInput() {
@@ -84,6 +92,11 @@ void tttmp::draw() {
 		}
 		gamewindow_.draw(grid[i].square);
 	}
+
+	// Draw line
+	sf::Vertex line[] = {
+		sf::Vertex(sf::Vector2f());
+	};
 
 	gamewindow_.display();
 }
