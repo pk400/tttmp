@@ -1,10 +1,7 @@
 #ifndef TTTMP_HPP_
 #define TTTMP_HPP_
 
-#include <SFML/Graphics.hpp>
-#include "settings.hpp"
-#include "square.hpp"
-#include <vector>
+#include "grid.hpp"
 
 class tttmp {
 public:
@@ -16,7 +13,7 @@ public:
 	void 	draw();
 	void 	setSettings(const Settings& settings);
 private:
-	std::vector<Square> grid;
+	Grid grid_;
 	sf::RenderWindow gamewindow_;
 	Settings gs_;
 };

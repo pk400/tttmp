@@ -1,5 +1,4 @@
 #include "tttmp.hpp"
-#include <iostream>
 
 tttmp::tttmp(int height, int width, const char* title) {
 	gamewindow_.create(sf::VideoMode(height, width), title);
@@ -24,38 +23,8 @@ bool tttmp::run() {
 }
 
 void tttmp::createGrid() {
-	sf::RectangleShape rect(gs_.sqsize);
-	rect.setFillColor(gs_.sqcolor);
-
-	Square sq;
-	sq.square = rect;
-
-	grid.push_back(sq);
-	grid.push_back(sq);
-	grid.push_back(sq);
-	grid.push_back(sq);
-	grid.push_back(sq);
-	grid.push_back(sq);
-	grid.push_back(sq);
-	grid.push_back(sq);
-	grid.push_back(sq);
-
-	for(int i = 0; i < 9; i++) {
-		// Default position for top left square
-		sf::Vector2f pos = sf::Vector2f(0, 0);
-
-		/*	-------------
-		 * 	| 0 | 1 | 2 |
-		 *  | 3 | 4 | 5 |
-		 *  | 6 | 7 | 8 |
-		 *  -------------
-		 */
-
-		pos.x = (i%3==0)?0:((i%2==0)?gs_.sqsize.x:gs_.sqsize.x*2);
-		pos.y = (i>5)?gs_.sqsize.y*2:((i>2)?gs_.sqsize.y:0);
-
-		grid[i].square.setPosition(pos);
-	}
+	//grid_ = new Grid(gs_);
+	grid_.initialize(gs_);
 }
 
 int tttmp::getInput() {
@@ -76,27 +45,24 @@ int tttmp::getInput() {
 }
 
 void tttmp::update() {
+	sf::Vector2i mouse = sf::Mouse::getPosition(gamewindow_);
 
+	for(int i = 0; i < 9; i++) {
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			if(grid_[i].tsq.getGlobalBounds().contains(mouse.x, mouse.y)) {
+				grid_[i].tsq.setFillColor(sf::Color::Red);
+				grid_[i].state = CROSS;
+			}
+		}
+	}
 }
 
 void tttmp::draw() {
 	gamewindow_.clear(gs_.bgcolor);
 
-	sf::Vector2i mouse = sf::Mouse::getPosition(gamewindow_);
-
 	for(int i = 0; i < 9; i++) {
-		if(sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-				grid[i].square.getGlobalBounds().contains(mouse.x, mouse.y)) {
-			grid[i].square.setFillColor(sf::Color::Red);
-			grid[i].state = CROSS;
-		}
-		gamewindow_.draw(grid[i].square);
+		gamewindow_.draw(grid_[i].tsq);
 	}
-
-	// Draw line
-	sf::Vertex line[] = {
-		sf::Vertex(sf::Vector2f());
-	};
 
 	gamewindow_.display();
 }

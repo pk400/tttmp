@@ -2,7 +2,7 @@
 #include "tttmp.hpp"
 
 int main(int argc, char** argv) {
-	int wsize = 150;
+	int wsize = 600;
 	tttmp game(wsize, wsize, "Tic Tac Toe Multiplayer");
 
 	Settings gsettings;
