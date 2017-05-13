@@ -6,12 +6,17 @@
 class tttmp {
 public:
 	tttmp(int height, int width, const char* title);
-	bool 	run();
 	void 	createGrid();
+	void 	setSettings(const Settings& settings);
+
+	Settings& getSettings();
+	Grid& 	getGrid();
+
+	bool 	run();
 	int 	getInput();
 	void 	update();
 	void 	draw();
-	void 	setSettings(const Settings& settings);
+	sf::RenderWindow& getWindow();
 private:
 	Grid grid_;
 	sf::RenderWindow gamewindow_;

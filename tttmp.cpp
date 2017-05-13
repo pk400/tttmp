@@ -66,6 +66,15 @@ void tttmp::draw() {
 	gamewindow_.display();
 }
 
+Settings& tttmp::getSettings() {
+	return gs_;
+}
+
 void tttmp::setSettings(const Settings& settings) {
 	gs_ = settings;
 }
+
+Grid& tttmp::getGrid() {
+	return grid_;
+}
+
