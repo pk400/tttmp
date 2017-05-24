@@ -1,7 +1,6 @@
 #ifndef GRID_HPP_
 #define GRID_HPP_
 
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include "settings.hpp"
 
@@ -15,7 +14,7 @@ struct tSquare {
 class Grid {
 public:
 	Grid();
-	void initialize(const Settings& gs);
+	void initialize();
 	std::vector<tSquare> getSquares();
 	tSquare& operator[](int index) {
 		return griddata_[index];

@@ -1,15 +1,17 @@
+
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "tttmp.hpp"
+
+Settings* Settings::instance = 0;
 
 int main(int argc, char** argv) {
 	int wsize = 600;
 	tttmp game(wsize, wsize, "Tic Tac Toe Multiplayer");
 
-	Settings gsettings;
-	gsettings.sqsize 	= sf::Vector2f(wsize/3, wsize/3);
-	gsettings.bgcolor 	= sf::Color::Black;
-	gsettings.sqcolor 	= sf::Color::White;
-	game.setSettings(gsettings);
+	Settings::getInstance()->setSquareSize(sf::Vector2f(wsize/3, wsize/3));
+	Settings::getInstance()->setBgColor(sf::Color::Black);
+	Settings::getInstance()->setSqColor(sf::Color::White);
 
 	game.createGrid();
 

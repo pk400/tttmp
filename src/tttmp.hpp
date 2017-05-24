@@ -7,9 +7,7 @@ class tttmp {
 public:
 	tttmp(int height, int width, const char* title);
 	void 	createGrid();
-	void 	setSettings(const Settings& settings);
 
-	Settings& getSettings();
 	Grid& 	getGrid();
 
 	bool 	run();
@@ -20,7 +18,6 @@ public:
 private:
 	Grid grid_;
 	sf::RenderWindow gamewindow_;
-	Settings gs_;
 };
 
 #endif /* TTTMP_HPP_ */

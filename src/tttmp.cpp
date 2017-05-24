@@ -23,7 +23,7 @@ bool tttmp::run() {
 }
 
 void tttmp::createGrid() {
-	grid_.initialize(gs_);
+	grid_.initialize();
 }
 
 int tttmp::getInput() {
@@ -57,21 +57,13 @@ void tttmp::update() {
 }
 
 void tttmp::draw() {
-	gamewindow_.clear(gs_.bgcolor);
+	gamewindow_.clear(Settings::getInstance()->getBgColor());
 
 	for(int i = 0; i < 9; i++) {
 		gamewindow_.draw(grid_[i].tsq);
 	}
 
 	gamewindow_.display();
-}
-
-Settings& tttmp::getSettings() {
-	return gs_;
-}
-
-void tttmp::setSettings(const Settings& settings) {
-	gs_ = settings;
 }
 
 Grid& tttmp::getGrid() {
